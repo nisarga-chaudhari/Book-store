@@ -1,0 +1,54 @@
+<h1>Add Product Details Here...</h1>
+<div class="container">
+    <font style="color: red;">{{msg}}</font><br>
+    <form #addproduct="ngForm" (ngSubmit)="onClickSubmit(addproduct.value)">
+
+        <div class="form-group">
+            <label for="title">Book Name:</label>
+            <input type="text" class="form-control" id="title" name="title" [(ngModel)]="title" >
+        </div> 
+        <div class="form-group">
+            <label for="author">Author :</label>
+            <input type="text" class="form-control" id="author" name="author" [(ngModel)]="author" >
+        </div> 
+        <div class="form-group">
+            <label for="booktype">Book Type :</label>
+            <select  class="form-control form-control-dropdown" name="booktype" id="booktype" [(ngModel)]="booktype" required> 
+                <option *ngFor="let type of categoryList">
+                    {{type.booktype}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="price">Book Price:</label>
+            <input type="text" class="form-control" id="price" name="price" [(ngModel)]="price" >
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+
+    </form>
+    <br>
+    <table class='table'>
+        <tr>
+            <th>S.No.</th>
+            <th>Book Name</th>
+            <th>Author</th>
+            <th>Book Price</th>
+            <th>Upload Image</th>
+        </tr>
+
+        <tr *ngFor="let p of plist">
+            <td>{{p._id}}</td>
+            <td>{{p.title}}</td>
+            <td>{{p.author}}</td>
+            <td>Rs. {{p.price}}</td>
+            <td><img src="assets/Product/{{p.prodimg}}" height="120" width="140"><td>
+            <td><input type="file" (change)="handleChangePic($event)" class="form-control">
+            <br>
+            <div class="removefilter">
+            <button class='btn buy' (click)="upload(p['_id'])">Upload</button>     
+            <button style="margin-top: 18px;" class='btn btn-default' (click)="removeBook(p._id)">Remove</button>   
+            </div>  
+            </td>                           
+        </tr>
+    </table>
+</div>
